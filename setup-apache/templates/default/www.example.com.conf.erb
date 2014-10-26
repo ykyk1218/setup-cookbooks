@@ -1,0 +1,24 @@
+<Directory /var/www/vhosts/www.example.com/htdocs>
+    Options FollowSymLinks
+    AllowOverride All
+</Directory>
+
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@example.com
+    DocumentRoot /var/www/vhosts/www.example.com/htdocs
+    ServerName local.example.com
+    ErrorLog "|/usr/sbin/rotatelogs /var/log/httpd/www.example.com/error_log.%Y%m%d 86400"
+    CustomLog "|/usr/sbin/rotatelogs /var/log/httpd/www.example.com/access_log.%Y%m%d 86400" common
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerAdmin webmaster@example.com
+    DocumentRoot /var/www/vhosts/www.example.com/htdocs
+    ServerName local.example.com
+    ErrorLog "|/usr/sbin/rotatelogs /var/log/httpd/www.example.com/logs/ssl_error_log.%Y%m%d 86400"
+    CustomLog "|/usr/sbin/rotatelogs /var/log/httpd/www.example.com/logs/ssl_access_log.%Y%m%d 86400" common
+    SSLEngine on
+    SSLCertificateFile /etc/httpd/ssl/server.crt
+    SSLCertificateKeyFile /etc/httpd/ssl/server.key
+</VirtualHost>
